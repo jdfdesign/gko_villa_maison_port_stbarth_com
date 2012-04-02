@@ -105,18 +105,17 @@ body {
 	border: 1px solid #B7B6B6;
 	margin-bottom: $baseLineHeight;
 }
-.image-large-wrapper {
-	a.image-large-nav {
-		top: 50%;
-		left: 8px;
-		background: #FFF asset_url("icons.png", image) no-repeat 0 0;
-		@include circle(30px);
-		opacity: .7;
-		&:hover {
-			opacity: 1;
-		};
+.carousel-control {
+	top: 50%;
+	background: #FFF asset_url("icons.png", image) no-repeat 0 0;
+	@include circle(30px);
+	opacity: .7;
+	text-indent: -9999px;
+	border: none;
+	&:hover {
+		opacity: 1;
 	}
-	a.image-large-nav.image-large-nav-next{
+	&.right {
 		right:8px;
 		background-position: -28px 0;
 	}
