@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120313171358) do
+ActiveRecord::Schema.define(:version => 20120331103325) do
 
   create_table "accounts", :force => true do |t|
     t.string   "reference",  :limit => 40
@@ -21,6 +21,33 @@ ActiveRecord::Schema.define(:version => 20120313171358) do
     t.datetime "expires_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "asset_assignments", :force => true do |t|
+    t.integer  "position",                      :default => 1, :null => false
+    t.integer  "asset_id",                                     :null => false
+    t.integer  "attachable_id",                                :null => false
+    t.string   "attachable_type", :limit => 40,                :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+  end
+
+  add_index "asset_assignments", ["attachable_id", "attachable_type"], :name => "index_asset_assignments_on_attachable_id_and_attachable_type"
+
+  create_table "assets", :force => true do |t|
+    t.integer  "account_id"
+    t.integer  "site_id"
+    t.integer  "asset_assignments_count", :default => 0
+    t.string   "type"
+    t.string   "asset_mime_type"
+    t.string   "asset_name"
+    t.integer  "asset_size"
+    t.integer  "asset_width"
+    t.integer  "asset_height"
+    t.string   "asset_uid"
+    t.string   "asset_ext"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
 
   create_table "configurations", :force => true do |t|
@@ -84,6 +111,21 @@ ActiveRecord::Schema.define(:version => 20120313171358) do
     t.datetime "updated_at"
   end
 
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "site_id"
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
   create_table "document_assignments", :force => true do |t|
     t.integer  "position",                      :default => 1, :null => false
     t.integer  "document_id",                                  :null => false
@@ -126,8 +168,8 @@ ActiveRecord::Schema.define(:version => 20120313171358) do
   create_table "document_translations", :force => true do |t|
     t.integer  "document_id"
     t.string   "locale"
-    t.string   "title"
     t.string   "alt"
+    t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -258,6 +300,18 @@ ActiveRecord::Schema.define(:version => 20120313171358) do
   end
 
   add_index "inquiries", ["site_id"], :name => "index_inquiries_on_site_id"
+
+  create_table "liquid_models", :force => true do |t|
+    t.integer  "site_id"
+    t.text     "body"
+    t.string   "path"
+    t.string   "format"
+    t.string   "locale"
+    t.string   "handler"
+    t.boolean  "partial",    :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
 
   create_table "mail_methods", :force => true do |t|
     t.integer  "site_id"
@@ -430,10 +484,13 @@ ActiveRecord::Schema.define(:version => 20120313171358) do
     t.integer  "globalized",                             :default => 0
     t.text     "plugins"
     t.integer  "site_registrations_count",               :default => 0
+    t.string   "localhost"
+    t.integer  "theme_id"
   end
 
   add_index "sites", ["account_id"], :name => "index_sites_on_account_id"
   add_index "sites", ["host"], :name => "index_sites_on_host", :unique => true
+  add_index "sites", ["theme_id"], :name => "index_sites_on_theme_id"
 
   create_table "states", :force => true do |t|
     t.string  "name"
@@ -450,6 +507,25 @@ ActiveRecord::Schema.define(:version => 20120313171358) do
   end
 
   add_index "supports", ["owner_id", "owner_type"], :name => "index_supports_on_owner_id_and_owner_type", :unique => true
+
+  create_table "themes", :force => true do |t|
+    t.integer  "site_id"
+    t.string   "name"
+    t.string   "theme_id"
+    t.string   "author"
+    t.string   "version"
+    t.string   "homepage"
+    t.text     "summary"
+    t.integer  "active"
+    t.string   "document_mime_type"
+    t.string   "document_name"
+    t.integer  "document_size"
+    t.string   "document_uid"
+    t.string   "document_ext"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.text     "settings"
+  end
 
   create_table "tokenized_permissions", :force => true do |t|
     t.integer  "permissable_id"

@@ -18,10 +18,8 @@ $navbarButtonBackgroundHighlight: black;
 $navbarButtonBackground: black; 
 $navbarButtonIconBarColor: white;
 
-
- 
 // Links
-$linkColor: #ADADAD;
+//$linkColor: #ADADAD;
 $linkColorHover: #191919;
 
 // Import
@@ -46,7 +44,7 @@ h1 {
 	line-height: 70px;
 	text-transform: uppercase;
 	letter-spacing: 2px;
-	text-align: center;
+	//text-align: center;
 	letter-spacing: 3px;
 }
 h2 {
@@ -55,16 +53,16 @@ h2 {
 	line-height: 70px;
 	text-transform: uppercase;
 	letter-spacing: 2px;
-	text-align: center;
+	//text-align: center;
 	letter-spacing: 3px;
 }
 h3 {
 	font-size: 12px;
 	font-weight: normal;
-	line-height: 70px;
+	line-height: 24px;
 	text-transform: uppercase;
 	letter-spacing: 2px;
-	text-align: center;
+	//text-align: center;
 	letter-spacing: 3px;
 }
 h4 {
@@ -74,7 +72,7 @@ h4 {
 	line-height: 70px;
 	text-transform: uppercase;
 	letter-spacing: 2px;
-	text-align: center;
+	//text-align: center;
 	letter-spacing: 3px;
 }
 /*-----------------------------------------
@@ -83,12 +81,13 @@ h4 {
 .html_text {
 	text-transform: uppercase;
 	letter-spacing: 2px;
+	text-align: center;
 	p, ul {
 		font-weight: 300;
 	}
 	p {
-		margin-bottom: $baseLineHeight * 2;
-		@include columns(50%, 2, 50px, #ccc, dotted);
+		margin-bottom: $baseLineHeight;
+	//	@include columns(50%, 2, 50px, #ccc, dotted);
 	}
 }
 /*-----------------------------------------
@@ -127,58 +126,58 @@ body {
 ----------------------------------------- */
 
 .navbar .brand {
-	@include logo(200px, 80px);
-	float: left;
-	
+	@include logo(200px, 80px);	
 }
 .navbar {
 	border-top: 3px solid #B7B6B6;
 }
+
+
 .header-nav {
 	border-bottom: 1px solid #B7B6B6; 
 	padding: $baseLineHeight * 1.5 0;
-
-	@include clearfix;
-	.nav > li { 
-		.text {
-			padding-left: 16px;
-		}
-		.icon {
-			display: inline-block;
-			width:21px;
-			height: 4px;
-			background: transparent asset-url("nav-dot.png", image) 0 0 no-repeat;
-		} 
-		&:first-child { 
-			background: none;
-			padding-left: 0;
-			.text {
-				padding-left: 0; 
-			}
-			.icon {
-				display: none;
-			} 
-		}
-	}	
-	.nav > li > a {
-		text-transform: uppercase;
-		font-size: 11px;
-		font-weight: normal;
-		letter-spacing: 2px;
-		line-height: 28px;
-	}
-	nav {
-		float: right;
-	}
 }
-
-
+.navbar .dropdown-menu a,
+.header-nav .nav > li > a {
+	text-transform: uppercase;
+	font-size: 11px;
+	font-weight: normal;
+	letter-spacing: 2px;
+	line-height: 28px;
+}
 /*-----------------------------------------
  RESPONSIVE
 ----------------------------------------- */
 @import "gko/responsive";
+@media (min-width: 981px) {
+	.header-nav {
+		border-bottom: 1px solid #B7B6B6; 
+		padding: $baseLineHeight * 1.5 0;
 
-
-// LANDSCAPE PHONE TO SMALL DESKTOP & PORTRAIT TABLET
-// --------------------------------------------------
-
+		@include clearfix;
+		.nav > li { 
+			.text {
+				padding-left: 16px;
+			}
+			.icon {
+				display: inline-block;
+				width:21px;
+				height: 4px;
+				background: transparent asset-url("nav-dot.png", image) 0 0 no-repeat;
+			} 
+			&:first-child { 
+				background: none;
+				padding-left: 0;
+				.text {
+					padding-left: 0; 
+				}
+				.icon {
+					display: none;
+				} 
+			}
+		}	
+		nav {
+			float: right;
+		}
+	}
+}
