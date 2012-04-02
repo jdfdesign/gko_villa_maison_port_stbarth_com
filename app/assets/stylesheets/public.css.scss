@@ -5,7 +5,7 @@ $bodyBackgroundColor: #F8F8F8;
 
 // Typography
 $baseFontFamily: "garamond-premier-pro-caption", "Georgia", serif; 
-$baseFontSize: 10px;
+$baseFontSize: 12px;
 $baseLineHeight: 24px;
 $textColor: #4C4C4C;
 
@@ -44,7 +44,7 @@ h1 {
 	line-height: 70px;
 	text-transform: uppercase;
 	letter-spacing: 2px;
-	//text-align: center;
+	text-align: center;
 	letter-spacing: 3px;
 }
 h2 {
@@ -53,7 +53,7 @@ h2 {
 	line-height: 70px;
 	text-transform: uppercase;
 	letter-spacing: 2px;
-	//text-align: center;
+	text-align: center;
 	letter-spacing: 3px;
 }
 h3 {
@@ -62,7 +62,7 @@ h3 {
 	line-height: 24px;
 	text-transform: uppercase;
 	letter-spacing: 2px;
-	//text-align: center;
+	text-align: center;
 	letter-spacing: 3px;
 }
 h4 {
@@ -72,7 +72,7 @@ h4 {
 	line-height: 70px;
 	text-transform: uppercase;
 	letter-spacing: 2px;
-	//text-align: center;
+	text-align: center;
 	letter-spacing: 3px;
 }
 /*-----------------------------------------
@@ -103,6 +103,7 @@ body {
 	background-color: white;
 	padding:18px;
 	border: 1px solid #B7B6B6;
+	margin-bottom: $baseLineHeight;
 }
 .image-large-wrapper {
 	a.image-large-nav {
