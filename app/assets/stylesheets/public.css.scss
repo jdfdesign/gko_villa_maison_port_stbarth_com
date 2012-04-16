@@ -8,12 +8,9 @@ $baseFontFamily: "garamond-premier-pro-caption", "Georgia", serif;
 $baseFontSize: 12px;
 $baseLineHeight: 24px;
 $textColor: #4C4C4C;
-
 $headingTextColor: #191919;
 
 // Navbar
-$navbarBackgroundHighlight: #F8F8F8;
-$navbarBackground: #F8F8F8;
 $navbarButtonBackgroundHighlight: black; 
 $navbarButtonBackground: black; 
 $navbarButtonIconBarColor: white;
@@ -105,31 +102,27 @@ body {
 	border: 1px solid #B7B6B6;
 	margin-bottom: $baseLineHeight;
 }
-.carousel-control {
-	top: 50%;
-	background: #FFF asset_url("icons.png", image) no-repeat 0 0;
-	@include circle(30px);
-	opacity: .7;
-	text-indent: -9999px;
-	border: none;
-	&:hover {
-		opacity: 1;
-	}
-	&.right {
-		right:8px;
-		background-position: -28px 0;
-	}
-} 
-
 /*-----------------------------------------
  HEADER
 ----------------------------------------- */
+
 body {
-	border-top: 3px solid #B7B6B6;
+	border-top: 3px solid #5d5b59;
+}
+#locales.nav {
+	background-color: #5d5b59;
+	color: #fff;
+	@include corner-bottom(4px);	
+}
+ .navbar .header-top #locales.nav > li > a {
+	color: #fff;
+	&:hover {
+		color: #fff;	
+	};
 }
 .header-nav {
 	border-bottom: 1px solid #B7B6B6; 
-	padding: $baseLineHeight * 1.5 0;
+	padding-top: $baseLineHeight * 1.5;
 }
 .navbar .dropdown-menu a,
 .header-nav .nav > li > a {
@@ -146,36 +139,58 @@ body {
 @media (min-width: 980px) {
 	/*-----------------------------------------
 	 HEADER
-	----------------------------------------- */
-	.header-nav {
-		border-bottom: 1px solid #B7B6B6; 
-		padding: $baseLineHeight * 1.5 0;
-
-		@include clearfix;
-		.nav > li { 
+	----------------------------------------- */ 
+	.navbar-inner {
+	  background-image: none;
+	  background: none; 
+	}
+	.navbar .brand {
+		width: 100%;
+		a {
+			@include center-block;
+			text-align: center;
+		}
+		
+	}
+	.navbar .header-nav nav {
+		@include center-nav;  
+	}
+	.navbar .header-nav .nav > li { 
+		.text {
+			padding-left: 16px;
+		}
+		.icon {
+			display: inline-block;
+			width:20px;
+			height: 4px;
+			background: transparent asset-url("nav-dot.png", image) 0 0 no-repeat;
+		} 
+		&:first-child { 
+			background: none;
+			padding-left: 0;
 			.text {
-				padding-left: 16px;
+				padding-left: 0; 
 			}
 			.icon {
-				display: inline-block;
-				width:21px;
-				height: 4px;
-				background: transparent asset-url("nav-dot.png", image) 0 0 no-repeat;
+				display: none;
 			} 
-			&:first-child { 
-				background: none;
-				padding-left: 0;
-				.text {
-					padding-left: 0; 
-				}
-				.icon {
-					display: none;
-				} 
-			}
-		}	
-		nav {
-			float: right;
 		}
+	}
+	.navbar .header-nav .nav > li .dropdown-menu > a {
+		.text {
+			padding-left: 0; 
+		}
+		.icon {
+			display: none;
+		}
+	}
+	.navbar .header-nav .nav > li > a { 
+		padding: 10px 0px 11px 10px;
+	}
+	.navbar .nav-collapse {
+		margin-top:10px;
+		@include clearfix;
+		padding-top:10px;
 	}
 	
 	/*-----------------------------------------
