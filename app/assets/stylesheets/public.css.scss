@@ -1,27 +1,80 @@
-/* custom variables >>> */ 
-$altColor: #900; //red 
-/* <<< custom variables */ 
-$bodyBackgroundColor: #F8F8F8;
+// Variables.less
+// Variables to customize the look and feel of Bootstrap
+// -----------------------------------------------------
+
+
+
+// GLOBAL VALUES
+// --------------------------------------------------
+
+// Grays
+// -------------------------
+$black:                 #000;
+$grayDarker:            #222;
+$grayDark:              #333;
+$gray:                  #555;
+$grayLight:             #999;
+$grayLighter:           #eee;
+$white:                 #fff;
+
+
+// Accent colors
+// -------------------------
+$blue:                  #07ABDD;
+$blueDark:              #0064cd;
+$green:                 #46a546;
+$red:                   #9d261d;
+$yellow:                #ffc40d;
+$orange:                #f89406;
+$pink:                  #c3325f;
+$purple:                #7a43b6;
+
+
+// Scaffolding
+// -------------------------
+$bodyBackground:        #F8F8F8;
+$textColor:             #4C4C4C;
+
+// Links
+// -------------------------
+$linkColor:             $grayDark;
+$linkColorHover:        #191919;
 
 // Typography
 $baseFontFamily: "garamond-premier-pro-caption", "Georgia", serif; 
 $baseFontSize: 12px;
 $baseLineHeight: 24px;
-$textColor: #4C4C4C;
-$headingTextColor: #191919;
+
+$headingsColor: #191919;
+
+// Dropdowns
+// -------------------------
+$dropdownBackground:            $white;
+$dropdownBorder:                rgba(0,0,0,.2);
+$dropdownLinkColor:             #191919;
+$dropdownLinkColorHover:        $grayLight;
+$dropdownLinkBackgroundHover:   transparent;
+$dropdownDividerTop:            $grayLight;
+$dropdownDividerBottom:         $white;
 
 // Navbar
-$navbarButtonBackgroundHighlight: black; 
-$navbarButtonBackground: black; 
-$navbarButtonIconBarColor: white;
+// -------------------------
+$navbarHeight:                    40px;
+$navbarBackground:                $bodyBackground;
+$navbarBackgroundHighlight:       $bodyBackground;
+$navbarText:                      $grayLight;
+$navbarLinkColor:                 #191919;
+$navbarLinkColorHover:            $grayLight;
+$navbarLinkColorActive:           $navbarLinkColorHover;
+$navbarLinkBackgroundHover:       transparent;
+$navbarLinkBackgroundActive:      $navbarBackground;
 
-// Links
-//$linkColor: #ADADAD;
-$linkColorHover: #191919;
 
 // Import
-@import "gko_public_all"; 
-@import "gko/elastislide"; 
+@import "twitter/bootstrap";
+@import "gko/mixin.1.0.0";
+@import "gko/grid";
+@import "galleria";
 
 /*-----------------------------------------
    SHARED STYLES 
@@ -32,7 +85,13 @@ $linkColorHover: #191919;
 	letter-spacing: 1px; 
 	text-transform: uppercase; 
 }
-
+/*-----------------------------------------
+ LAYOUT 
+----------------------------------------- */
+#wrapper-wide-body {
+	max-width: 1020px;
+	@include center-block;
+}
 /*-----------------------------------------
  TYPOGRAPHY 
 ----------------------------------------- */
@@ -84,7 +143,9 @@ h4 {
 	}
 	p {
 		margin-bottom: $baseLineHeight;
-	//	@include columns(50%, 2, 50px, #ccc, dotted);
+	}
+	ul {
+		list-style-position: inside;
 	}
 }
 /*-----------------------------------------
@@ -92,6 +153,7 @@ h4 {
 ----------------------------------------- */ 
 body {
 	display: none;
+	border-top: 3px solid #5d5b59;
 }
 /*-----------------------------------------
    SLIDESHOW
@@ -102,19 +164,32 @@ body {
 	border: 1px solid #B7B6B6;
 	margin-bottom: $baseLineHeight;
 }
+// Nav settings
+// --------------
+nav .nav li  a {
+	text-transform: uppercase;
+	font-size: 11px;
+	font-weight: normal;
+	letter-spacing: 2px;
+	line-height: 28px;
+	text-shadow: none;
+	@include transition(all 0.3s ease-in-out);
+	i, .text {
+		display:inline-block;
+	    @include ie7-inline-block();
+	}
+}
 /*-----------------------------------------
  HEADER
 ----------------------------------------- */
-
-body {
-	border-top: 3px solid #5d5b59;
-}
-#locales.nav {
+#locales-menu .nav {
 	background-color: #5d5b59;
 	color: #fff;
-	@include corner-bottom(4px);	
+	@include border-radius(0 0 4px 4px);	
 }
- .navbar .header-top #locales.nav > li > a {
+#locales-menu .nav > li > a {
+	font-size: 9px;
+	letter-spacing: 1px; 
 	color: #fff;
 	&:hover {
 		color: #fff;	
@@ -124,69 +199,75 @@ body {
 	border-bottom: 1px solid #B7B6B6; 
 	padding-top: $baseLineHeight * 1.5;
 }
-.navbar .dropdown-menu a,
-.header-nav .nav > li > a {
+
+
+.navbar .brand {
+	float: none;
+	text-align: center;
+	a {
+		padding: 0;
+		margin: 0 auto;
+		background: transparent image-url("logo.png") center center no-repeat;
+		background-size: contain;
+		cursor: pointer;
+		text-decoration: none;
+		display: block;
+		width: 200px;
+		height: 80px;
+		@include hide-text;
+		
+	}
+}
+.navbar .btn-navbar {
+	@include center-block;
+	float: none;
+	@include buttonBackground($grayDark, $grayDarker);
+	color: $white;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 1);
 	text-transform: uppercase;
-	font-size: 11px;
-	font-weight: normal;
 	letter-spacing: 2px;
-	line-height: 28px;
+	i {
+		margin-right: 8px;
+	}
+	display: none
 }
 /*-----------------------------------------
  RESPONSIVE
 ----------------------------------------- */
-@import "gko/responsive";
+@import "twitter/bootstrap/responsive";
 @media (min-width: 980px) {
 	/*-----------------------------------------
 	 HEADER
 	----------------------------------------- */ 
-	.navbar-inner {
-	  background-image: none;
-	  background: none; 
-	}
-	.navbar .brand {
-		width: 100%;
-		a {
-			@include center-block;
-			text-align: center;
-		}
-		
-	}
-	.navbar .header-nav nav {
-		@include center-nav;  
-	}
-	.navbar .header-nav .nav > li { 
-		.text {
-			padding-left: 16px;
-		}
-		.icon {
-			display: inline-block;
-			width:20px;
-			height: 4px;
-			background: transparent asset-url("nav-dot.png", image) 0 0 no-repeat;
-		} 
-		&:first-child { 
-			background: none;
-			padding-left: 0;
-			.text {
-				padding-left: 0; 
+
+	/* Main menu settings */
+	nav#primary-menu {
+		margin-top: 23px;
+		ul.nav {
+			@include center-nav();
+			> li > a {
+				padding: 10px 0px 11px 10px;
+				i {
+					width:20px;
+					height: 4px;
+					background: transparent asset-url("nav-dot.png", image) 0 0 no-repeat;
+				}
+				.text {
+					padding-left: 16px;
+				}
 			}
-			.icon {
-				display: none;
-			} 
+			li:first-child a {
+				i {
+					display: none;
+				}
+				.text {
+					padding-left: 0;
+				}
+				
+			}
 		}
 	}
-	.navbar .header-nav .nav > li .dropdown-menu > a {
-		.text {
-			padding-left: 0; 
-		}
-		.icon {
-			display: none;
-		}
-	}
-	.navbar .header-nav .nav > li > a { 
-		padding: 10px 0px 11px 10px;
-	}
+
 	.navbar .nav-collapse {
 		margin-top:10px;
 		@include clearfix;
@@ -200,15 +281,12 @@ body {
 		border-top: 1px solid #B7B6B6; 
 		padding-bottom: $baseLineHeight * .5;
 		padding-top: $baseLineHeight * .5;
-		nav {
-			@include clearfix;
-			@include center-nav;
+		.nav {
+			@include center-nav;	
 		}
 		.nav > li > a  {
-			font-weight: normal;
 			font-size: 9px;
 			letter-spacing: 1px; 
-			text-transform: uppercase;
 		}
 	}
 }

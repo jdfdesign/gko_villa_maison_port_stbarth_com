@@ -1,3 +1,5 @@
+villa-maison-port-stbarth.local
+
 cd ~/Github/gko_villa_maison_port_stbarth_com
 tail -f log/development.log
 
