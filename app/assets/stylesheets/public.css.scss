@@ -134,7 +134,7 @@ h4 {
 /*-----------------------------------------
    OVERWRITTE
 ----------------------------------------- */
-.html_text {
+.html-text {
 	text-transform: uppercase;
 	letter-spacing: 2px;
 	text-align: center;
@@ -158,7 +158,7 @@ body {
 /*-----------------------------------------
    SLIDESHOW
 ----------------------------------------- */ 
-.diaporama {
+.galleria {
 	background-color: white;
 	padding:18px;
 	border: 1px solid #B7B6B6;
@@ -231,6 +231,22 @@ nav .nav li  a {
 	}
 	display: none
 }
+	
+/*-----------------------------------------
+ FOOTER
+----------------------------------------- */
+#footer {
+	border-top: 1px solid #B7B6B6; 
+	padding-bottom: $baseLineHeight * .5;
+	padding-top: $baseLineHeight * .5;
+	.nav {
+		@include center-nav;	
+	}
+	.nav > li > a  {
+		font-size: 9px;
+		letter-spacing: 1px; 
+	}
+}
 /*-----------------------------------------
  RESPONSIVE
 ----------------------------------------- */
@@ -273,20 +289,5 @@ nav .nav li  a {
 		@include clearfix;
 		padding-top:10px;
 	}
-	
-	/*-----------------------------------------
-	 FOOTER
-	----------------------------------------- */
-	#footer {
-		border-top: 1px solid #B7B6B6; 
-		padding-bottom: $baseLineHeight * .5;
-		padding-top: $baseLineHeight * .5;
-		.nav {
-			@include center-nav;	
-		}
-		.nav > li > a  {
-			font-size: 9px;
-			letter-spacing: 1px; 
-		}
-	}
+
 }

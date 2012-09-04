@@ -21,6 +21,7 @@ bundle exec rake db:admin:create
 bundle exec rake db:load_default 
 bundle exec rake db:load_sample
 
+rake db:migrate
 
 cd ~/developer/workspace/gko_joufdesign_com
 rake jobs:work

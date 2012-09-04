@@ -91,7 +91,6 @@ $(document).ready(function() {
 	            responsive: true,
 	            height: .65,
 				carousel: false,
-			//	thumbnails: "numbers",
 	            imageCrop: 'landscape',
 	            transition: 'flash',
 	            showCounter: false,
