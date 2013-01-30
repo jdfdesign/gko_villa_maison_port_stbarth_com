@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120904210517) do
+ActiveRecord::Schema.define(:version => 20130130175123) do
 
   create_table "accounts", :force => true do |t|
     t.string   "reference",  :limit => 40
@@ -48,14 +48,6 @@ ActiveRecord::Schema.define(:version => 20120904210517) do
     t.string   "asset_ext"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-  end
-
-  create_table "configurations", :force => true do |t|
-    t.integer  "site_id"
-    t.string   "name"
-    t.string   "type",       :limit => 50
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "content_translations", :force => true do |t|
@@ -180,47 +172,6 @@ ActiveRecord::Schema.define(:version => 20120904210517) do
   add_index "documents", ["account_id"], :name => "index_documents_on_account_id"
   add_index "documents", ["site_id"], :name => "index_documents_on_site_id"
 
-  create_table "element_images", :id => false, :force => true do |t|
-    t.integer  "site_id"
-    t.integer  "section_id"
-    t.integer  "image_id"
-    t.string   "title"
-    t.string   "caption"
-    t.string   "link"
-    t.string   "link_target"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  add_index "element_images", ["image_id"], :name => "index_element_images_on_image_id"
-  add_index "element_images", ["section_id"], :name => "index_element_images_on_section_id"
-  add_index "element_images", ["site_id"], :name => "index_element_images_on_site_id"
-
-  create_table "field_types", :force => true do |t|
-    t.string   "name"
-    t.string   "presentation"
-    t.string   "value_type"
-    t.integer  "site_id"
-    t.string   "class_name"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
-
-  add_index "field_types", ["name"], :name => "index_field_types_on_name"
-  add_index "field_types", ["site_id", "class_name"], :name => "index_field_types_on_site_id_and_class_name"
-
-  create_table "field_values", :force => true do |t|
-    t.integer  "field_type_id"
-    t.integer  "customizable_id"
-    t.string   "customizable_type"
-    t.text     "body"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
-  end
-
-  add_index "field_values", ["customizable_id", "customizable_type"], :name => "index_field_values_on_customizable_id_and_customizable_type"
-  add_index "field_values", ["field_type_id"], :name => "index_field_values_on_field_type_id"
-
   create_table "image_assignments", :force => true do |t|
     t.integer  "position",                      :default => 1, :null => false
     t.integer  "image_id",                                     :null => false
@@ -319,11 +270,20 @@ ActiveRecord::Schema.define(:version => 20120904210517) do
   end
 
   create_table "mail_methods", :force => true do |t|
-    t.integer  "site_id"
-    t.string   "environment"
-    t.boolean  "active",      :default => true
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "site_id",                                                       :null => false
+    t.string   "environment",            :default => "production"
+    t.boolean  "enable_mail_delivery",   :default => true
+    t.string   "mail_host",              :default => "localhost"
+    t.string   "mail_domain",            :default => "localhost"
+    t.integer  "mail_port",              :default => 25
+    t.string   "mail_auth_type",         :default => "none"
+    t.string   "smtp_username",                                                 :null => false
+    t.string   "smtp_password",                                                 :null => false
+    t.string   "secure_connection_type", :default => "None"
+    t.string   "mails_from",             :default => "no-reply@joufdesign.com"
+    t.string   "mail_bcc"
+    t.datetime "created_at",                                                    :null => false
+    t.datetime "updated_at",                                                    :null => false
   end
 
   add_index "mail_methods", ["site_id"], :name => "index_mail_methods_on_site_id"
@@ -427,8 +387,8 @@ ActiveRecord::Schema.define(:version => 20120904210517) do
     t.boolean  "shallow_permalink", :default => true
     t.boolean  "robot_index",       :default => true
     t.boolean  "robot_follow",      :default => true
-    t.boolean  "locked",            :default => false
-    t.integer  "locked_by"
+    t.boolean  "restricted",        :default => false
+    t.string   "template"
   end
 
   add_index "sections", ["link_id", "link_type"], :name => "index_sections_on_link_id_and_link_type"
@@ -479,6 +439,10 @@ ActiveRecord::Schema.define(:version => 20120904210517) do
     t.string   "logo_ext"
     t.string   "default_image_uid"
     t.integer  "languages_count",          :default => 0
+    t.datetime "liquid_models_updated_at"
+    t.text     "page_types"
+    t.boolean  "front_page_cached",        :default => false
+    t.text     "mailer_settings"
   end
 
   add_index "sites", ["account_id"], :name => "index_sites_on_account_id"
@@ -492,14 +456,6 @@ ActiveRecord::Schema.define(:version => 20120904210517) do
   end
 
   add_index "states", ["country_id"], :name => "index_states_on_country_id"
-
-  create_table "supports", :force => true do |t|
-    t.integer "owner_id"
-    t.string  "owner_type"
-    t.text    "infos"
-  end
-
-  add_index "supports", ["owner_id", "owner_type"], :name => "index_supports_on_owner_id_and_owner_type", :unique => true
 
   create_table "theme_assets", :force => true do |t|
     t.integer  "theme_id"

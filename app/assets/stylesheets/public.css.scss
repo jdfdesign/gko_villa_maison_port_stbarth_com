@@ -71,9 +71,8 @@ $navbarLinkBackgroundActive:      $navbarBackground;
 
 
 // Import
-@import "twitter/bootstrap";
-@import "gko/mixin.1.0.0";
-@import "gko/grid";
+@import "twitter.2.0.4/bootstrap";
+@import "gko/public/base";
 @import "galleria";
 
 /*-----------------------------------------

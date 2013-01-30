@@ -3,18 +3,22 @@ source :rubygems
 gem 'iconv'
 
 group :assets do
- gem 'sass-rails', '~> 3.2.5'
+ gem 'sass-rails', '~> 3.2.6'
  gem 'coffee-rails', '~> 3.2.2'
  gem 'uglifier', '>= 1.0.3'
 end
+
 group :production do
-	gem "gko_core", "= 0.3.87", :git => 'git@github.com:jdfdesign/gko_cms3.git'
-	gem "gko_auth", "= 0.3.87", :git => 'git@github.com:jdfdesign/gko_cms3.git'
-	gem "gko_images", "= 0.3.87", :git => 'git@github.com:jdfdesign/gko_cms3.git'
-	gem "gko_documents", "= 0.3.87", :git => 'git@github.com:jdfdesign/gko_cms3.git'
-	gem "gko_inquiries", "= 0.3.87", :git => 'git@github.com:jdfdesign/gko_cms3.git'
-	gem "gko_themes", "= 0.3.87", :git => 'git@github.com:jdfdesign/gko_cms3.git'
+  git 'git@github.com:jdfdesign/gko_cms3.git', :branch => '0.6.24-stable' do
+	  gem "gko_core"
+	  gem "gko_auth"
+	  gem "gko_images"
+	  gem "gko_documents"
+	  gem "gko_inquiries"
+	  gem "gko_themes"
+	end
 end
+
 #group :development do
 #	gem "gko_core", :path => File.expand_path('~/Github/gko_cms3/gko_core', __FILE__)
 #	gem "gko_auth", :path => File.expand_path('~/Github/gko_cms3/gko_auth', __FILE__)
